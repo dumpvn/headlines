@@ -17,9 +17,10 @@ RSS_FEEDS = {
 def get_bin(bin):
     return dict(code=0, message='Vietcombank') if bin == '123456' else jsonify(dict(code=1, message='BIN not found'))
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def get_news():
-    query = request.args.get('publication')
+    # query = request.args.get('publication')
+    query = request.form.get('publication')
     if not query or query.lower() not in RSS_FEEDS:
         publication = 'bbc'
     else:
